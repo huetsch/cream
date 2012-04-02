@@ -74,7 +74,7 @@ Date::tomorrow = ->
   new Date(@.valueOf() + 24.hours())
 
 Date::yesterday = ->
-  new Date(@.valueOf() + 24.hours())
+  new Date(@.valueOf() - 24.hours())
 
 Date::beginning_of_day = ->
   new Date(new Date(@).setHours(0, 0, 0, 0)) 
