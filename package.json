@@ -3,8 +3,9 @@
   "description": "Extending Coffeescripts' primitive objects to be more like Rails'",
   "keywords": ["rails", "cream", "core extensions"],
   "homepage": "https://github.com/huetsch/cream",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "dependencies": {
+    "prettydate": ">= 0.0.1"
   },
   "main": "./cream.js",
   "author": "Mark Huetsch <markhuetsch@gmail.com>",

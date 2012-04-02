@@ -1,4 +1,5 @@
 (function() {
+  var blues_strftime;
 
   Array.prototype.sum = function() {
     if (this.length > 0) {
@@ -148,6 +149,12 @@
     var last_date;
     last_date = this.days_in_month();
     return new Date(new Date(this).setDate(last_date)).end_of_day();
+  };
+
+  blues_strftime = require('prettydate').strftime;
+
+  Date.prototype.strftime = function(str) {
+    return blues_strftime(this, str);
   };
 
 }).call(this);

@@ -109,3 +109,7 @@ Date::beginning_of_month = ->
 Date::end_of_month = ->
   last_date = @days_in_month()
   new Date(new Date(@).setDate(last_date)).end_of_day()
+
+blues_strftime = require('prettydate').strftime
+Date::strftime = (str) ->
+  blues_strftime(@, str)
