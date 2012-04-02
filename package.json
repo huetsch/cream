@@ -3,7 +3,7 @@
   "description": "Extending Coffeescripts' primitive objects to be more like Rails'",
   "keywords": ["rails", "cream", "core extensions"],
   "homepage": "https://github.com/huetsch/cream",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "prettydate": ">= 0.0.1"
   },

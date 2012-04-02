@@ -1,6 +1,16 @@
 (function() {
   var blues_strftime;
 
+  Object.clone = function(obj) {
+    var key, newInstance;
+    if (!(obj != null) || typeof obj !== 'object') return obj;
+    newInstance = new obj.constructor();
+    for (key in obj) {
+      newInstance[key] = clone(obj[key]);
+    }
+    return newInstance;
+  };
+
   Array.prototype.sum = function() {
     if (this.length > 0) {
       return this.reduce(function(x, y) {
