@@ -1,0 +1,110 @@
+# Copyright (C) 2012 Mark Huetsch
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Array::sum = ->
+  if this.length > 0
+    this.reduce (x, y) -> x + y
+  else
+    0
+
+Array::first = ->
+  if this.length > 0
+    this[0]
+  else
+    undefined
+
+Array::last = ->
+  if this.length > 0
+    this[this.length - 1]
+
+Array::max = ->
+  this.reduce (a,b) -> Math.max a, b
+
+Array::flatten = ->
+  this.reduce ((xs, el) ->
+    if Array.isArray el
+      xs.concat el.flatten()
+    else
+      xs.concat [el]), []
+
+String::capitalize = ->
+  (this.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join(' ')
+
+String::beginsWith = (str) -> if @match(new RegExp "^#{str}") then true else false
+String::endsWith = (str) -> if @match(new RegExp "#{str}$") then true else false
+
+Number::seconds = ->
+  @ * 1000
+
+Number::minutes = ->
+  @seconds() * 60
+
+Number::minute = Number::minutes
+
+Number::hours = ->
+  @minutes() * 60
+
+Number::hour = Number::hours
+
+Number::ago = ->
+  new Date(new Date().valueOf() - @)
+
+Number::from_now = ->
+  new Date(new Date().valueOf() + @)
+
+Date.COMMON_YEAR_DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] 
+
+# TODO we could use some tests here
+Date.is_gregorian_leap_year = (y) ->
+  y % 4 is 0 and y % 100 isnt 0 or y % 400 is 0
+
+Date::days_in_month = ->
+  if @.getMonth() is 1 and Date.is_gregorian_leap_year (@.getFullYear())
+    29
+  else
+    Date.COMMON_YEAR_DAYS_IN_MONTH[@.getMonth()]
+
+Date::tomorrow = ->
+  new Date(@.valueOf() + 24.hours())
+
+Date::yesterday = ->
+  new Date(@.valueOf() + 24.hours())
+
+Date::beginning_of_day = ->
+  new Date(new Date(@).setHours(0, 0, 0, 0)) 
+
+Date::end_of_day = ->
+  new Date(new Date(@).setHours(23, 59, 59, 999))
+
+# incrementing and decrementing by 1 works in setMonth(-1) and setMonth(12)
+Date::prev_month = ->
+  d = new Date(@)
+  d2 = d.beginning_of_month()
+  d2.setMonth(@.getMonth() - 1)
+  num_days_in_prev_month = d2.days_in_month()
+  if num_days_in_prev_month < d.getDate()
+    d.setDate(num_days_in_prev_month)
+  d.setMonth(@.getMonth() - 1)
+  d
+
+Date::next_month = ->
+  d = new Date(@)
+  d2 = d.beginning_of_month()
+  d2.setMonth(@.getMonth() + 1)
+  num_days_in_next_month = d2.days_in_month()
+  if num_days_in_next_month < d.getDate()
+    d.setDate(num_days_in_next_month)
+  d.setMonth(@.getMonth() + 1)
+  d
+
+Date::beginning_of_month = ->
+  new Date(new Date(@).setDate(1)).beginning_of_day()
+
+Date::end_of_month = ->
+  last_date = @days_in_month()
+  new Date(new Date(@).setDate(last_date)).end_of_day()
