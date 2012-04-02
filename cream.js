@@ -60,6 +60,10 @@
     }
   };
 
+  String.prototype.dasherize = function() {
+    return this.replace(/_/g, '-');
+  };
+
   Number.prototype.seconds = function() {
     return this * 1000;
   };
