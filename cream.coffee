@@ -37,6 +37,7 @@ String::capitalize = ->
 
 String::beginsWith = (str) -> if @match(new RegExp "^#{str}") then true else false
 String::endsWith = (str) -> if @match(new RegExp "#{str}$") then true else false
+String::dasherize = -> this.replace(/_/g, '-')
 
 Number::seconds = ->
   @ * 1000
