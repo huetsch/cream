@@ -107,7 +107,7 @@
   };
 
   Date.prototype.yesterday = function() {
-    return new Date(this.valueOf() + 24..hours());
+    return new Date(this.valueOf() - 24..hours());
   };
 
   Date.prototype.beginning_of_day = function() {
