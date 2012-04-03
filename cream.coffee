@@ -50,6 +50,16 @@ String::beginsWith = (str) -> if @match(new RegExp "^#{str}") then true else fal
 String::endsWith = (str) -> if @match(new RegExp "#{str}$") then true else false
 String::dasherize = -> this.replace(/_/g, '-')
 
+# XXX this function is a quick hack to translate TagHelper more easily. i'm pretty sure it doesn't actually ensure safety because it
+# doesn't protect against unsafe string methods or concatenation (and we can't overload the + operator), but it's probably good
+# enough for now
+#
+# Nota bene: this is a kluge of the worst kind and should be eliminated
+String::html_safe = ->
+  this.is_html_safe = 1
+  this
+
+
 Number::seconds = ->
   @ * 1000
 

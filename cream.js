@@ -75,6 +75,11 @@
     return this.replace(/_/g, '-');
   };
 
+  String.prototype.html_safe = function() {
+    this.is_html_safe = 1;
+    return this;
+  };
+
   Number.prototype.seconds = function() {
     return this * 1000;
   };
