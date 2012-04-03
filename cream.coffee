@@ -39,7 +39,21 @@ Array::last = ->
     this[this.length - 1]
 
 Array::max = ->
-  this.reduce (a,b) -> Math.max a, b
+  Math.max.apply(Math, @)
+
+Array::min = ->
+  Math.min.apply(Math, @)
+
+Array::zip = (arrs...) ->
+  arrs = [Object.clone(@)].concat arrs
+  max_len = arrs.map((arr) -> arr.length).max()
+  ret = []
+  for i in [0...max_len]
+    group = []
+    for arr in arrs
+      group.push arr[i]
+    ret.push group
+  ret
 
 Array::flatten = ->
   this.reduce ((xs, el) ->

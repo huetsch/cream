@@ -1,5 +1,6 @@
 (function() {
-  var blues_strftime;
+  var blues_strftime,
+    __slice = Array.prototype.slice;
 
   Object["delete"] = function(obj, k) {
     var v;
@@ -41,9 +42,30 @@
   };
 
   Array.prototype.max = function() {
-    return this.reduce(function(a, b) {
-      return Math.max(a, b);
-    });
+    return Math.max.apply(Math, this);
+  };
+
+  Array.prototype.min = function() {
+    return Math.min.apply(Math, this);
+  };
+
+  Array.prototype.zip = function() {
+    var arr, arrs, group, i, max_len, ret, _i, _len;
+    arrs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    arrs = [Object.clone(this)].concat(arrs);
+    max_len = arrs.map(function(arr) {
+      return arr.length;
+    }).max();
+    ret = [];
+    for (i = 0; 0 <= max_len ? i < max_len : i > max_len; 0 <= max_len ? i++ : i--) {
+      group = [];
+      for (_i = 0, _len = arrs.length; _i < _len; _i++) {
+        arr = arrs[_i];
+        group.push(arr[i]);
+      }
+      ret.push(group);
+    }
+    return ret;
   };
 
   Array.prototype.flatten = function() {
