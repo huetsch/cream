@@ -13,7 +13,7 @@ Object.clone = (obj) ->
   newInstance = new obj.constructor()
 
   for key of obj
-    newInstance[key] = clone obj[key]
+    newInstance[key] = Object.clone obj[key]
 
   return newInstance
 

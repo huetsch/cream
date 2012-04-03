@@ -6,7 +6,7 @@
     if (!(obj != null) || typeof obj !== 'object') return obj;
     newInstance = new obj.constructor();
     for (key in obj) {
-      newInstance[key] = clone(obj[key]);
+      newInstance[key] = Object.clone(obj[key]);
     }
     return newInstance;
   };
