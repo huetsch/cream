@@ -1,6 +1,13 @@
 (function() {
   var blues_strftime;
 
+  Object["delete"] = function(obj, k) {
+    var v;
+    v = obj[k];
+    delete obj[k];
+    return v;
+  };
+
   Object.clone = function(obj) {
     var key, newInstance;
     if (!(obj != null) || typeof obj !== 'object') return obj;
