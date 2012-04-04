@@ -110,6 +110,8 @@
     return this.replace(reg, '-');
   };
 
+  String.prototype.strip = String.prototype.trim;
+
   String.prototype.html_safe = function() {
     this.is_html_safe = 1;
     return this;
@@ -154,11 +156,11 @@
   };
 
   Date.prototype.tomorrow = function() {
-    return new Date(this.valueOf() + 24..hours());
+    return new Date(this.valueOf() + 24 * 60 * 60 * 1000);
   };
 
   Date.prototype.yesterday = function() {
-    return new Date(this.valueOf() - 24..hours());
+    return new Date(this.valueOf() - 24 * 60 * 60 * 1000);
   };
 
   Date.prototype.beginning_of_day = function() {

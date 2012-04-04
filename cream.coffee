@@ -75,6 +75,7 @@ String::dasherize = (reg = /_/g) ->
   if typeof reg is 'string'
     reg = new RegExp(reg, 'g')
   this.replace(reg, '-')
+String::strip = String::trim
 
 # XXX this function is a quick hack to translate TagHelper more easily. i'm pretty sure it doesn't actually ensure safety because it
 # doesn't protect against unsafe string methods or concatenation (and we can't overload the + operator), but it's probably good
@@ -105,7 +106,7 @@ Number::ago = ->
 Number::from_now = ->
   new Date(new Date().valueOf() + @)
 
-Date.COMMON_YEAR_DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] 
+Date.COMMON_YEAR_DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 # TODO we could use some tests here
 Date.is_gregorian_leap_year = (y) ->
@@ -118,13 +119,15 @@ Date::days_in_month = ->
     Date.COMMON_YEAR_DAYS_IN_MONTH[@.getMonth()]
 
 Date::tomorrow = ->
-  new Date(@.valueOf() + 24.hours())
+  #new Date(@.valueOf() + 24.hours())
+  new Date(@.valueOf() + 24 * 60 * 60 * 1000)
 
 Date::yesterday = ->
-  new Date(@.valueOf() - 24.hours())
+  #new Date(@.valueOf() - 24.hours())
+  new Date(@.valueOf() - 24 * 60 * 60 * 1000)
 
 Date::beginning_of_day = ->
-  new Date(new Date(@).setHours(0, 0, 0, 0)) 
+  new Date(new Date(@).setHours(0, 0, 0, 0))
 
 Date::end_of_day = ->
   new Date(new Date(@).setHours(23, 59, 59, 999))
