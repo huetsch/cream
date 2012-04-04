@@ -37,3 +37,9 @@ describe 'Cream', ->
 
   it "[1,2,3].reject (x) -> x >= 2", ->
     expect([1,2,3].reject (x) -> x >= 2).toEqual [1]
+
+  it "[1,2,b: 3].extract_options() is {b: 3}", ->
+    expect([1,2,b: 3].extract_options()).toEqual b: 3
+
+  it "[1,2].extract_options() is {}", ->
+    expect([1,2].extract_options()).toEqual {}

@@ -114,6 +114,14 @@
     });
   };
 
+  Array.prototype.extract_options = function() {
+    if (Object.isPlainObject(this.last())) {
+      return this.pop();
+    } else {
+      return {};
+    }
+  };
+
   String.prototype.capitalize = function() {
     return (this.split(' ').map(function(word) {
       return word[0].toUpperCase() + word.slice(1).toLowerCase();
