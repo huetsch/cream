@@ -41,6 +41,10 @@
     if (this.length > 0) return this[this.length - 1];
   };
 
+  Array.prototype.butLast = function() {
+    if (this.length > 0) return this.slice(0, -1);
+  };
+
   Array.prototype.max = function() {
     return Math.max.apply(Math, this);
   };
@@ -100,8 +104,10 @@
     }
   };
 
-  String.prototype.dasherize = function() {
-    return this.replace(/_/g, '-');
+  String.prototype.dasherize = function(reg) {
+    if (reg == null) reg = /_/g;
+    if (typeof reg === 'string') reg = new RegExp(reg, 'g');
+    return this.replace(reg, '-');
   };
 
   String.prototype.html_safe = function() {

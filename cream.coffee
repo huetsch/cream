@@ -38,6 +38,10 @@ Array::last = ->
   if this.length > 0
     this[this.length - 1]
 
+Array::butLast = ->
+  if this.length > 0
+    this[0...-1]
+
 Array::max = ->
   Math.max.apply(Math, @)
 
@@ -67,7 +71,10 @@ String::capitalize = ->
 
 String::beginsWith = (str) -> if @match(new RegExp "^#{str}") then true else false
 String::endsWith = (str) -> if @match(new RegExp "#{str}$") then true else false
-String::dasherize = -> this.replace(/_/g, '-')
+String::dasherize = (reg = /_/g) ->
+  if typeof reg is 'string'
+    reg = new RegExp(reg, 'g')
+  this.replace(reg, '-')
 
 # XXX this function is a quick hack to translate TagHelper more easily. i'm pretty sure it doesn't actually ensure safety because it
 # doesn't protect against unsafe string methods or concatenation (and we can't overload the + operator), but it's probably good

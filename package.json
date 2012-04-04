@@ -1,13 +1,17 @@
 {
-  "name": "cream",
-  "description": "Extending Coffeescripts' primitive objects to be more like Rails'",
-  "keywords": ["rails", "cream", "core extensions"],
-  "homepage": "https://github.com/huetsch/cream",
-  "version": "0.0.13",
-  "dependencies": {
-    "prettydate": ">= 0.0.1"
-  },
-  "main": "./cream.js",
-  "author": "Mark Huetsch <markhuetsch@gmail.com>",
-  "license": "MIT"
+    "name": "cream",
+    "description": "Extending Coffeescripts' primitive objects to be more like Rails'",
+    "keywords": [
+        "rails",
+        "cream",
+        "core extensions"
+    ],
+    "homepage": "https://github.com/huetsch/cream",
+    "version": "0.0.15",
+    "dependencies": {
+        "prettydate": ">= 0.0.1"
+    },
+    "main": "./cream.js",
+    "author": "Mark Huetsch <markhuetsch@gmail.com>",
+    "license": "MIT"
 }
