@@ -22,6 +22,22 @@ Object.clone = (obj) ->
 
   return newInstance
 
+Object.merge = (o1, o2) ->
+  o1 = Object.clone o1
+  for own k, v of o2
+    o1[k] = v
+  o1
+
+# ported from https://github.com/medikoo/es5-ext/blob/master/lib/Object/is-plain-object.js
+Object.isPlainObject = (obj) ->
+   (obj and (typeof obj is 'object') and (Object.getPrototypeOf(obj) is Object.prototype) and (Object.prototype.toString.call(obj) is {}.toString())) or false
+
+Array.wrap = (obj) ->
+  if obj instanceof Array
+    obj
+  else
+    [obj]
+
 Array::sum = ->
   if this.length > 0
     this.reduce (x, y) -> x + y
@@ -65,6 +81,8 @@ Array::flatten = ->
       xs.concat el.flatten()
     else
       xs.concat [el]), []
+
+Array::select = Array::filter
 
 String::capitalize = ->
   (this.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join(' ')

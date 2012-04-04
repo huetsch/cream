@@ -1,5 +1,6 @@
 (function() {
   var blues_strftime,
+    __hasProp = Object.prototype.hasOwnProperty,
     __slice = Array.prototype.slice;
 
   Object["delete"] = function(obj, k) {
@@ -17,6 +18,29 @@
       newInstance[key] = Object.clone(obj[key]);
     }
     return newInstance;
+  };
+
+  Object.merge = function(o1, o2) {
+    var k, v;
+    o1 = Object.clone(o1);
+    for (k in o2) {
+      if (!__hasProp.call(o2, k)) continue;
+      v = o2[k];
+      o1[k] = v;
+    }
+    return o1;
+  };
+
+  Object.isPlainObject = function(obj) {
+    return (obj && (typeof obj === 'object') && (Object.getPrototypeOf(obj) === Object.prototype) && (Object.prototype.toString.call(obj) === {}.toString())) || false;
+  };
+
+  Array.wrap = function(obj) {
+    if (obj instanceof Array) {
+      return obj;
+    } else {
+      return [obj];
+    }
   };
 
   Array.prototype.sum = function() {
@@ -81,6 +105,8 @@
       }
     }), []);
   };
+
+  Array.prototype.select = Array.prototype.filter;
 
   String.prototype.capitalize = function() {
     return (this.split(' ').map(function(word) {

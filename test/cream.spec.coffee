@@ -27,3 +27,10 @@ describe 'Cream', ->
 
   it '[3,2,1]".butLast() is [3,2]', ->
     expect([3,2,1].butLast()).toEqual [3,2]
+
+  it "non-destructively merges an array of objects", ->
+    a = a: 1, b: 2
+    b = b: 3, c: 4
+    c = c: 5, d: 6
+    expect([a, b, c].reduce Object.merge).toEqual { a: 1, b: 3, c: 5, d: 6 }
+    expect(a).toEqual { a: 1, b: 2 }
