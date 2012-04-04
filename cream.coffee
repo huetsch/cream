@@ -84,6 +84,9 @@ Array::flatten = ->
 
 Array::select = Array::filter
 
+Array::reject = (fn) ->
+  @.select (x) -> not fn(x)
+
 String::capitalize = ->
   (this.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join(' ')
 

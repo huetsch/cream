@@ -108,6 +108,12 @@
 
   Array.prototype.select = Array.prototype.filter;
 
+  Array.prototype.reject = function(fn) {
+    return this.select(function(x) {
+      return !fn(x);
+    });
+  };
+
   String.prototype.capitalize = function() {
     return (this.split(' ').map(function(word) {
       return word[0].toUpperCase() + word.slice(1).toLowerCase();

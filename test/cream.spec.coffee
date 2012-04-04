@@ -34,3 +34,6 @@ describe 'Cream', ->
     c = c: 5, d: 6
     expect([a, b, c].reduce Object.merge).toEqual { a: 1, b: 3, c: 5, d: 6 }
     expect(a).toEqual { a: 1, b: 2 }
+
+  it "[1,2,3].reject (x) -> x >= 2", ->
+    expect([1,2,3].reject (x) -> x >= 2).toEqual [1]
