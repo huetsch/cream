@@ -38,6 +38,8 @@
   Array.wrap = function(obj) {
     if (obj instanceof Array) {
       return obj;
+    } else if (obj === null || obj === void 0) {
+      return [];
     } else {
       return [obj];
     }

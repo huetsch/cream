@@ -35,6 +35,8 @@ Object.isPlainObject = (obj) ->
 Array.wrap = (obj) ->
   if obj instanceof Array
     obj
+  else if obj is null or obj is undefined
+    []
   else
     [obj]
 
