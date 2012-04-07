@@ -43,3 +43,6 @@ describe 'Cream', ->
 
   it "[1,2].extract_options() is {}", ->
     expect([1,2].extract_options()).toEqual {}
+
+  it "Array::compact filters undefined and null values", ->
+    expect([1, null, 2, undefined].compact()).toEqual [1,2]

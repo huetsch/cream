@@ -28,9 +28,21 @@ Object.merge = (o1, o2) ->
     o1[k] = v
   o1
 
+Object.update = (o1, o2) ->
+  for own k, v of o2
+    o1[k] = v
+  o1
+
+Object.toArray = (obj) ->
+  [k, v] for own k, v of obj
+
 # ported from https://github.com/medikoo/es5-ext/blob/master/lib/Object/is-plain-object.js
 Object.isPlainObject = (obj) ->
    (obj and (typeof obj is 'object') and (Object.getPrototypeOf(obj) is Object.prototype) and (Object.prototype.toString.call(obj) is {}.toString())) or false
+
+#Object::map = (fn) ->
+#  if arguments.length is 0
+#    for own k, v of @
 
 Array.wrap = (obj) ->
   if obj instanceof Array
@@ -88,6 +100,9 @@ Array::select = Array::filter
 
 Array::reject = (fn) ->
   @.select (x) -> not fn(x)
+
+Array::compact = ->
+  @reject (x) -> x is undefined or x is null
 
 Array::extract_options = ->
   if Object.isPlainObject(@.last())

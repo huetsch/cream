@@ -31,6 +31,27 @@
     return o1;
   };
 
+  Object.update = function(o1, o2) {
+    var k, v;
+    for (k in o2) {
+      if (!__hasProp.call(o2, k)) continue;
+      v = o2[k];
+      o1[k] = v;
+    }
+    return o1;
+  };
+
+  Object.toArray = function(obj) {
+    var k, v, _results;
+    _results = [];
+    for (k in obj) {
+      if (!__hasProp.call(obj, k)) continue;
+      v = obj[k];
+      _results.push([k, v]);
+    }
+    return _results;
+  };
+
   Object.isPlainObject = function(obj) {
     return (obj && (typeof obj === 'object') && (Object.getPrototypeOf(obj) === Object.prototype) && (Object.prototype.toString.call(obj) === {}.toString())) || false;
   };
@@ -113,6 +134,12 @@
   Array.prototype.reject = function(fn) {
     return this.select(function(x) {
       return !fn(x);
+    });
+  };
+
+  Array.prototype.compact = function() {
+    return this.reject(function(x) {
+      return x === void 0 || x === null;
     });
   };
 
