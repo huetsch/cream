@@ -46,3 +46,9 @@ describe 'Cream', ->
 
   it "Array::compact filters undefined and null values", ->
     expect([1, null, 2, undefined].compact()).toEqual [1,2]
+
+  it "can humanize an underscored word", ->
+    expect("employee_salary".humanize()).toEqual "Employee salary"
+
+  it "can humanize an underscored word ending in _id", ->
+    expect("author_id".humanize()).toEqual "Author"

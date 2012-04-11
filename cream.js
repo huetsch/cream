@@ -152,9 +152,26 @@
   };
 
   String.prototype.capitalize = function() {
-    return (this.split(' ').map(function(word) {
-      return word[0].toUpperCase() + word.slice(1).toLowerCase();
-    })).join(' ');
+    if (this.trim().length === 0) {
+      return this.valueOf();
+    } else {
+      return (this.split(' ').map(function(word) {
+        return word[0].toUpperCase() + word.slice(1).toLowerCase();
+      })).join(' ');
+    }
+  };
+
+  String.prototype.humanize = function() {
+    var result, splits;
+    result = this.valueOf();
+    result = result.replace(/_id$/g, "");
+    result = result.replace(/_/g, ' ');
+    splits = result.split(' ');
+    if (splits.length > 1) {
+      return result = splits[0].capitalize() + ' ' + splits.slice(1).join(' ');
+    } else {
+      return result = splits[0].capitalize();
+    }
   };
 
   String.prototype.beginsWith = function(str) {

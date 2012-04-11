@@ -111,7 +111,25 @@ Array::extract_options = ->
     {}
 
 String::capitalize = ->
-  (this.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join(' ')
+  if @.trim().length is 0
+    @.valueOf()
+  else
+    (this.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join(' ')
+
+String::humanize = () ->
+  result = @.valueOf()
+  #inflections.humans.each { |(rule, replacement)| break if result.gsub!(rule, replacement) }
+  result = result.replace(/_id$/g, "")
+  result = result.replace(/_/g, ' ')
+  splits = result.split(' ')
+  if splits.length > 1
+    result = splits[0].capitalize() + ' ' + splits[1..-1].join(' ')
+  else
+    result = splits[0].capitalize()
+  # XXX not fully implemented
+  #result = result.replace(/([a-z\d]*)/gi) { |match|
+  #  "#{inflections.acronyms[match] || match.downcase}"
+  #}.gsub(/^\w/) { $&.upcase }
 
 String::beginsWith = (str) -> if @match(new RegExp "^#{str}") then true else false
 String::endsWith = (str) -> if @match(new RegExp "#{str}$") then true else false
