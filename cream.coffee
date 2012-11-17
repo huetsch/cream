@@ -110,6 +110,17 @@ Array::extract_options = ->
   else
     {}
 
+Array::group_by = (fn) ->
+  assoc = {}
+  for elem in this
+    key = fn(elem)
+    if assoc[key]
+      assoc[key].push elem
+    else
+      assoc[key] = [elem]
+  assoc
+
+
 String::capitalize = ->
   if @.trim().length is 0
     @.valueOf()

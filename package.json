@@ -7,7 +7,7 @@
         "core extensions"
     ],
     "homepage": "https://github.com/huetsch/cream",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "dependencies": {
         "prettydate": ">= 0.0.1"
     },
