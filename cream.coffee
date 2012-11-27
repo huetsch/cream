@@ -40,6 +40,15 @@ Object.toArray = (obj) ->
 Object.isPlainObject = (obj) ->
    (obj and (typeof obj is 'object') and (Object.getPrototypeOf(obj) is Object.prototype) and (Object.prototype.toString.call(obj) is {}.toString())) or false
 
+Object.fromArray = (array) ->
+  o = new Object()
+  for v in array
+    o[v[0]] = v[1]
+  o
+
+Object.invert = (obj) ->
+  Object.fromArray([v, k] for own k, v of obj)
+
 #Object::map = (fn) ->
 #  if arguments.length is 0
 #    for own k, v of @
